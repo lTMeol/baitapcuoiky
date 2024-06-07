@@ -23,6 +23,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     _currentProduct = widget.product;
   }
 
+  // Hàm hiển thị hộp thoại xác nhận xóa sản phẩm
   void _showDeleteDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -52,6 +53,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
+  // Hàm chuyển đến màn hình chỉnh sửa sản phẩm
   void _editProduct(BuildContext context) async {
     final updatedProduct = await Navigator.push(
       context,
@@ -65,7 +67,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       setState(() {
         _currentProduct = updatedProduct;
       });
-      widget.onEdit(updatedProduct);
+      widget.onEdit(updatedProduct); // Gọi hàm xử lý sự kiện chỉnh sửa sản phẩm
     }
   }
 
@@ -73,16 +75,18 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CHI TIẾT SẢN PHẨM'),
+        title: Text('CHI TIẾT SẢN PHẨM'), // Tiêu đề trang
         actions: [
           IconButton(
             icon: Icon(Icons.edit, color: Colors.white),
-            onPressed: () => _editProduct(context),
+            onPressed: () =>
+                _editProduct(context), // Mở màn hình chỉnh sửa sản phẩm
             tooltip: 'Sửa Sản Phẩm',
           ),
           IconButton(
             icon: Icon(Icons.delete, color: Colors.white),
-            onPressed: () => _showDeleteDialog(context),
+            onPressed: () => _showDeleteDialog(
+                context), // Hiển thị hộp thoại xác nhận xóa sản phẩm
             tooltip: 'Xóa Sản Phẩm',
           ),
         ],

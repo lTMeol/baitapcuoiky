@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Danh mục sản phẩm',
+      title: 'Danh mục sản phẩm', // Tiêu đề ứng dụng
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ProductCatalog(),
+      home: ProductCatalog(), // Trang chính của ứng dụng
       debugShowCheckedModeBanner: false,
     );
   }
@@ -32,7 +32,7 @@ class _ProductCatalogState extends State<ProductCatalog> {
   @override
   void initState() {
     super.initState();
-    _loadProducts();
+    _loadProducts(); // Load danh sách sản phẩm từ SharedPreferences khi widget được tạo
   }
 
   void _loadProducts() async {
@@ -49,21 +49,23 @@ class _ProductCatalogState extends State<ProductCatalog> {
   void _saveProducts() async {
     final prefs = await SharedPreferences.getInstance();
     final productString = jsonEncode(products);
-    prefs.setString('products', productString);
+    prefs.setString('products',
+        productString); // Lưu danh sách sản phẩm vào SharedPreferences
   }
 
   void _addProduct(Map<String, String> product) {
     setState(() {
-      products.add(product);
+      products.add(product); // Thêm sản phẩm mới vào danh sách
     });
-    _saveProducts();
+    _saveProducts(); // Lưu danh sách sản phẩm sau khi thêm mới
   }
 
   void _deleteProduct(String productName) {
     setState(() {
-      products.removeWhere((product) => product['name'] == productName);
+      products.removeWhere((product) =>
+          product['name'] == productName); // Xóa sản phẩm khỏi danh sách
     });
-    _saveProducts();
+    _saveProducts(); // Lưu danh sách sản phẩm sau khi xóa
   }
 
   void _editProduct(Map<String, String> editedProduct) {
@@ -71,10 +73,11 @@ class _ProductCatalogState extends State<ProductCatalog> {
       final index = products
           .indexWhere((product) => product['name'] == editedProduct['name']);
       if (index != -1) {
-        products[index] = editedProduct;
+        products[index] =
+            editedProduct; // Chỉnh sửa thông tin sản phẩm trong danh sách
       }
     });
-    _saveProducts(); // Cập nhật dữ liệu sau khi chỉnh sửa sản phẩm
+    _saveProducts(); // Lưu danh sách sản phẩm sau khi chỉnh sửa
   }
 
   @override
@@ -82,11 +85,11 @@ class _ProductCatalogState extends State<ProductCatalog> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'DANH MỤC SẢN PHẨM',
+          'DANH MỤC SẢN PHẨM', // Tiêu đề của trang
           style: TextStyle(
-            color: Colors.white, // Màu trắng cho tiêu đề
-            fontSize: 24, // Kích thước 24
-            fontWeight: FontWeight.bold, // Làm đậm
+            color: Colors.white, // Màu chữ
+            fontSize: 24, // Kích thước chữ
+            fontWeight: FontWeight.bold, // Độ đậm
           ),
         ),
         centerTitle: true, // Căn giữa tiêu đề
@@ -158,12 +161,13 @@ class _ProductCatalogState extends State<ProductCatalog> {
             MaterialPageRoute(builder: (context) => AddProduct()),
           );
           if (result != null) {
-            _addProduct(result);
+            _addProduct(
+                result); // Thêm sản phẩm mới khi nhận được kết quả từ màn hình thêm sản phẩm
           }
         },
         child: Icon(Icons.add),
-        backgroundColor: Theme.of(context).primaryColor, // Màu nền nút thêm
-        tooltip: 'Thêm sản phẩm', // Thêm tooltip cho nút thêm
+        backgroundColor: Theme.of(context).primaryColor, // Màu nền của nút thêm
+        tooltip: 'Thêm sản phẩm', // Tooltip cho nút thêm
       ),
     );
   }

@@ -12,6 +12,7 @@ class _AddProductState extends State<AddProduct> {
   String _name = '';
   File? _image;
 
+  // Hàm để chọn ảnh từ camera hoặc thư viện
   Future<void> _pickImage(ImageSource source) async {
     try {
       final pickedFile = await ImagePicker().pickImage(source: source);
@@ -22,7 +23,9 @@ class _AddProductState extends State<AddProduct> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Lỗi chọn ảnh: $e')),
+        SnackBar(
+            content: Text(
+                'Lỗi chọn ảnh: $e')), // Hiển thị thông báo khi có lỗi khi chọn ảnh
       );
     }
   }
@@ -31,7 +34,7 @@ class _AddProductState extends State<AddProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Thêm Sản Phẩm'),
+        title: Text('Thêm Sản Phẩm'), // Tiêu đề trang
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -50,18 +53,19 @@ class _AddProductState extends State<AddProduct> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Vui lòng nhập tên sản phẩm';
+                    return 'Vui lòng nhập tên sản phẩm'; // Kiểm tra xem người dùng đã nhập tên sản phẩm chưa
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  _name = value!;
+                  _name =
+                      value!; // Lưu tên sản phẩm khi người dùng hoàn thành nhập liệu
                 },
               ),
               SizedBox(height: 20),
               _image == null
                   ? Text(
-                      'Chưa chọn ảnh.',
+                      'Chưa chọn ảnh.', // Hiển thị thông báo nếu chưa có ảnh được chọn
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16),
                     )
@@ -73,14 +77,15 @@ class _AddProductState extends State<AddProduct> {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                       ),
-                      child: Image.file(_image!),
+                      child: Image.file(_image!), // Hiển thị ảnh đã chọn
                     ),
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton.icon(
-                    onPressed: () => _pickImage(ImageSource.camera),
+                    onPressed: () =>
+                        _pickImage(ImageSource.camera), // Chọn ảnh từ camera
                     icon: Icon(Icons.camera_alt),
                     label: Text('Chụp Ảnh'),
                     style: ElevatedButton.styleFrom(
@@ -89,7 +94,8 @@ class _AddProductState extends State<AddProduct> {
                     ),
                   ),
                   ElevatedButton.icon(
-                    onPressed: () => _pickImage(ImageSource.gallery),
+                    onPressed: () =>
+                        _pickImage(ImageSource.gallery), // Chọn ảnh từ thư viện
                     icon: Icon(Icons.photo_library),
                     label: Text('Chọn từ Thư Viện'),
                     style: ElevatedButton.styleFrom(
@@ -103,19 +109,22 @@ class _AddProductState extends State<AddProduct> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate() && _image != null) {
-                    _formKey.currentState!.save();
-                    Navigator.pop(
-                        context, {'name': _name, 'image': _image!.path});
+                    _formKey.currentState!
+                        .save(); // Lưu dữ liệu biểu mẫu khi hợp lệ
+                    Navigator.pop(context, {
+                      'name': _name,
+                      'image': _image!.path
+                    }); // Trả về dữ liệu sản phẩm đã thêm
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content:
-                            Text('Vui lòng hoàn thành biểu mẫu và chọn ảnh.'),
+                        content: Text(
+                            'Vui lòng hoàn thành biểu mẫu và chọn ảnh.'), // Hiển thị thông báo khi biểu mẫu chưa hoàn thành
                       ),
                     );
                   }
                 },
-                child: Text('Thêm Sản Phẩm'),
+                child: Text('Thêm Sản Phẩm'), // Text của nút thêm sản phẩm
                 style: ElevatedButton.styleFrom(
                   primary: Theme.of(context).colorScheme.secondary,
                   onPrimary: Colors.white,

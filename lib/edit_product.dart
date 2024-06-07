@@ -29,6 +29,7 @@ class _EditProductState extends State<EditProduct> {
     super.dispose();
   }
 
+  // Hàm để chọn ảnh từ camera hoặc thư viện
   Future<void> _pickImage(ImageSource source) async {
     try {
       final pickedFile = await ImagePicker().pickImage(source: source);
@@ -46,7 +47,7 @@ class _EditProductState extends State<EditProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chỉnh sửa sản phẩm'),
+        title: Text('Chỉnh sửa sản phẩm'), // Tiêu đề trang
       ),
       body: Center(
         child: Padding(
@@ -65,30 +66,34 @@ class _EditProductState extends State<EditProduct> {
                   children: <Widget>[
                     TextFormField(
                       controller: _nameController,
-                      decoration: InputDecoration(labelText: 'Tên sản phẩm'),
+                      decoration: InputDecoration(
+                          labelText:
+                              'Tên sản phẩm'), // Nhãn cho trường nhập tên sản phẩm
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Vui lòng nhập tên sản phẩm';
+                          return 'Vui lòng nhập tên sản phẩm'; // Kiểm tra xem người dùng đã nhập tên sản phẩm chưa
                         }
                         return null;
                       },
                     ),
                     SizedBox(height: 20),
                     _image == null
-                        ? Text('Chưa chọn ảnh.')
+                        ? Text(
+                            'Chưa chọn ảnh.') // Hiển thị thông báo nếu chưa có ảnh được chọn
                         : Container(
                             constraints: BoxConstraints(
                               maxWidth: 300,
                               maxHeight: 300,
                             ),
-                            child: Image.file(_image),
+                            child: Image.file(_image), // Hiển thị ảnh đã chọn
                           ),
                     SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         ElevatedButton.icon(
-                          onPressed: () => _pickImage(ImageSource.camera),
+                          onPressed: () => _pickImage(
+                              ImageSource.camera), // Chọn ảnh từ camera
                           icon: Icon(Icons.camera_alt),
                           label: Text('Chụp ảnh'),
                           style: ElevatedButton.styleFrom(
@@ -103,7 +108,8 @@ class _EditProductState extends State<EditProduct> {
                           ),
                         ),
                         ElevatedButton.icon(
-                          onPressed: () => _pickImage(ImageSource.gallery),
+                          onPressed: () => _pickImage(
+                              ImageSource.gallery), // Chọn ảnh từ thư viện
                           icon: Icon(Icons.photo),
                           label: Text('Chọn từ thư viện ảnh'),
                           style: ElevatedButton.styleFrom(
@@ -127,7 +133,8 @@ class _EditProductState extends State<EditProduct> {
                             'name': _nameController.text,
                             'image': _image.path,
                           };
-                          Navigator.pop(context, editedProduct);
+                          Navigator.pop(context,
+                              editedProduct); // Trả về dữ liệu đã chỉnh sửa khi nhấn nút lưu
                         }
                       },
                       child: Text('Lưu'),
