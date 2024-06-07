@@ -11,11 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Product Catalog',
+      title: 'Danh mục sản phẩm',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: ProductCatalog(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -81,11 +82,16 @@ class _ProductCatalogState extends State<ProductCatalog> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Product Catalog',
-          textAlign: TextAlign.center, // Căn giữa tiêu đề
+          'Danh mục sản phẩm',
+          style: TextStyle(
+            color: Colors.white, // Màu trắng cho tiêu đề
+            fontSize: 24, // Kích thước 24
+            fontWeight: FontWeight.bold, // Làm đậm
+          ),
         ),
-        centerTitle: true, // Đặt tiêu đề ở giữa
-        elevation: 4, // Thêm độ nâng của AppBar
+        centerTitle: true, // Căn giữa tiêu đề
+        elevation: 4, // Độ nâng của AppBar
+        backgroundColor: Colors.blue, // Màu nền của AppBar
       ),
       body: ListView.separated(
         padding: EdgeInsets.all(16.0),
@@ -156,6 +162,8 @@ class _ProductCatalogState extends State<ProductCatalog> {
           }
         },
         child: Icon(Icons.add),
+        backgroundColor: Theme.of(context).primaryColor, // Màu nền nút thêm
+        tooltip: 'Thêm sản phẩm', // Thêm tooltip cho nút thêm
       ),
     );
   }

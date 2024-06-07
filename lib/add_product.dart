@@ -21,7 +21,9 @@ class _AddProductState extends State<AddProduct> {
         });
       }
     } catch (e) {
-      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Lỗi khi chọn ảnh: $e')),
+      );
     }
   }
 
@@ -29,19 +31,26 @@ class _AddProductState extends State<AddProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Product'),
+        title: Text('Thêm Sản Phẩm'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
-          child: Column(
+          child: ListView(
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(labelText: 'Product Name'),
+                decoration: InputDecoration(
+                  labelText: 'Tên Sản Phẩm',
+                  border: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Theme.of(context).primaryColor),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a product name';
+                    return 'Vui lòng nhập tên sản phẩm';
                   }
                   return null;
                 },
@@ -51,11 +60,18 @@ class _AddProductState extends State<AddProduct> {
               ),
               SizedBox(height: 20),
               _image == null
-                  ? Text('No image selected.')
+                  ? Text(
+                      'Chưa chọn ảnh.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    )
                   : Container(
                       constraints: BoxConstraints(
-                        maxWidth: 300, // Giới hạn chiều rộng tối đa
-                        maxHeight: 300, // Giới hạn chiều cao tối đa
+                        maxWidth: 300,
+                        maxHeight: 300,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
                       ),
                       child: Image.file(_image!),
                     ),
@@ -63,13 +79,23 @@ class _AddProductState extends State<AddProduct> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  ElevatedButton(
+                  ElevatedButton.icon(
                     onPressed: () => _pickImage(ImageSource.camera),
-                    child: Text('Take Photo'),
+                    icon: Icon(Icons.camera_alt),
+                    label: Text('Chụp Ảnh'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                      onPrimary: Colors.white,
+                    ),
                   ),
-                  ElevatedButton(
+                  ElevatedButton.icon(
                     onPressed: () => _pickImage(ImageSource.gallery),
-                    child: Text('Pick from Gallery'),
+                    icon: Icon(Icons.photo_library),
+                    label: Text('Chọn từ Thư Viện'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                      onPrimary: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -80,9 +106,22 @@ class _AddProductState extends State<AddProduct> {
                     _formKey.currentState!.save();
                     Navigator.pop(
                         context, {'name': _name, 'image': _image!.path});
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content:
+                            Text('Vui lòng hoàn thành biểu mẫu và chọn ảnh.'),
+                      ),
+                    );
                   }
                 },
-                child: Text('Add Product'),
+                child: Text('Thêm Sản Phẩm'),
+                style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).colorScheme.secondary,
+                  onPrimary: Colors.white,
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  textStyle: TextStyle(fontSize: 18),
+                ),
               ),
             ],
           ),

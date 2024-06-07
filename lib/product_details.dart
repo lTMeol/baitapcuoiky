@@ -28,14 +28,14 @@ class _ProductDetailsState extends State<ProductDetails> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Product'),
-          content: Text('Are you sure you want to delete this product?'),
+          title: Text('Xóa Sản Phẩm'),
+          content: Text('Bạn có chắc chắn muốn xóa sản phẩm này không?'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Đóng hộp thoại
               },
-              child: Text('Cancel'),
+              child: Text('Hủy'),
             ),
             TextButton(
               onPressed: () {
@@ -44,7 +44,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Navigator.of(context).pop(
                     _currentProduct); // Truyền lại dữ liệu sản phẩm đã chỉnh sửa
               },
-              child: Text('Delete'),
+              child: Text('Xóa'),
             ),
           ],
         );
@@ -73,32 +73,95 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_currentProduct['name']!),
+        title: Text('Chi tiết sản phẩm'),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: Icon(Icons.edit, color: Colors.white),
             onPressed: () => _editProduct(context),
+            tooltip: 'Sửa Sản Phẩm',
           ),
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: Icon(Icons.delete, color: Colors.white),
             onPressed: () => _showDeleteDialog(context),
+            tooltip: 'Xóa Sản Phẩm',
           ),
         ],
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CircleAvatar(
-              radius: 80.0,
-              backgroundImage: FileImage(File(_currentProduct['image']!)),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
             ),
-            SizedBox(height: 20),
-            Text(
-              _currentProduct['name']!,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 80.0,
+                    backgroundImage: FileImage(File(_currentProduct['image']!)),
+                    backgroundColor: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10.0,
+                            offset: Offset(0, 10),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    _currentProduct['name']!,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () => _editProduct(context),
+                        icon: Icon(Icons.edit, color: Colors.white),
+                        label: Text('Sửa'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Theme.of(context).primaryColor,
+                          onPrimary: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 20),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 5,
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () => _showDeleteDialog(context),
+                        icon: Icon(Icons.delete, color: Colors.white),
+                        label: Text('Xóa'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red,
+                          onPrimary: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 20),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 5,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );
