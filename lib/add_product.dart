@@ -22,7 +22,7 @@ class _AddProductState extends State<AddProduct> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Lỗi khi chọn ảnh: $e')),
+        SnackBar(content: Text('Lỗi chọn ảnh: $e')),
       );
     }
   }

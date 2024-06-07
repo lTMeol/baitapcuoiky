@@ -73,7 +73,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chi tiết sản phẩm'),
+        title: Text('CHI TIẾT SẢN PHẨM'),
         actions: [
           IconButton(
             icon: Icon(Icons.edit, color: Colors.white),

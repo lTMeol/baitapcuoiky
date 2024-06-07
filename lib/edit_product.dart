@@ -105,7 +105,7 @@ class _EditProductState extends State<EditProduct> {
                         ElevatedButton.icon(
                           onPressed: () => _pickImage(ImageSource.gallery),
                           icon: Icon(Icons.photo),
-                          label: Text('Chọn từ thư viện'),
+                          label: Text('Chọn từ thư viện ảnh'),
                           style: ElevatedButton.styleFrom(
                             primary: Theme.of(context).primaryColor,
                             onPrimary: Colors.white,

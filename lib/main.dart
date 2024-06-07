@@ -82,7 +82,7 @@ class _ProductCatalogState extends State<ProductCatalog> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Danh mục sản phẩm',
+          'DANH MỤC SẢN PHẨM',
           style: TextStyle(
             color: Colors.white, // Màu trắng cho tiêu đề
             fontSize: 24, // Kích thước 24
