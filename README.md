@@ -1,16 +1,56 @@
-# app
+# Ứng dụng Quản lý Sản phẩm
 
 A new Flutter project.
 
-## Getting Started
+## Giới thiệu
 
-This project is a starting point for a Flutter application.
+Ứng dụng Quản lý Sản phẩm là một ứng dụng di động được xây dựng bằng Flutter để quản lý danh sách sản phẩm. Với ứng dụng này, người dùng có thể thêm, chỉnh sửa, xóa và xem chi tiết các sản phẩm một cách dễ dàng.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<div style="display:flex">
+    <img src="/lib/image/home.jpeg" alt="Home Screen" width="200"/>
+    <img src="/lib/image/themsanpham.jpeg" alt="Booking Screen" width="200"/>
+    <img src="/lib/image/chitietsanpham.jpeg" alt="History Screen" width="200"/>
+</div>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Các tính năng chính
+
+Thêm sản phẩm: Người dùng có thể thêm mới sản phẩm vào danh sách bằng cách nhập thông tin cần thiết và chọn ảnh từ thư viện hoặc chụp ảnh từ camera.
+Chỉnh sửa sản phẩm: Cho phép người dùng chỉnh sửa thông tin của sản phẩm đã có trong danh sách.
+Xóa sản phẩm: Người dùng có thể xóa sản phẩm không cần thiết khỏi danh sách.
+Xem chi tiết sản phẩm: Hiển thị thông tin chi tiết của sản phẩm, bao gồm tên và hình ảnh.
+
+### Cách cài đặt
+
+1. **Clone the repository:**
+
+   ```sh
+   git clone https://github.com/lTMeol/baitapcuoiky.git
+   ```
+
+   2.Mở thư mục repository trong terminal.
+   3.Chạy lệnh sau để cài đặt các dependencies:
+
+   ```sh
+   flutter pub get
+   ```
+
+   4.Kết nối thiết bị di động hoặc máy ảo và chạy ứng dụng:
+
+   ```sh
+   flutter run
+   ```
+
+### Yêu cầu hệ thống
+
+Flutter SDK
+Dart SDK
+IDE hoặc Text Editor (Ví dụ: Visual Studio Code)
+
+### Công nghệ và thư viện sử dụng
+
+Flutter
+Dart
+SharedPreferences: Để lưu trữ dữ liệu cục bộ.
+ImagePicker: Để chọn ảnh từ thư viện hoặc camera.
